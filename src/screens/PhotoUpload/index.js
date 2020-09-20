@@ -21,6 +21,7 @@ const PhotoUpload = () => {
       e.stopPropagation();
       setIsDragging(false)
       let files = [...e.dataTransfer.files];
+      var imageType = /image.*/;
       addImages(files)
     }
 
@@ -32,8 +33,9 @@ const PhotoUpload = () => {
     }
 
     const addImages = files => {
+      const imageType = /image.*/;
       if (files && files.length > 0) {
-          files = files.filter(f => !images.includes(f.name))
+          files = files.filter(f => !images.includes(f.name) && f.type.match(imageType))
           setImages(files)
       }
       console.log('images', images)
@@ -69,6 +71,7 @@ const PhotoUpload = () => {
 
     return (
       <>
+      <h2 className={styles.title}>Upload your images</h2>
       <form className={`${styles.form} ${isDragging ? styles.upload : ''}`} 
           encType="multipart/form-data"
           onDrop={e => handleDrop(e)}
@@ -78,7 +81,7 @@ const PhotoUpload = () => {
           onSubmit={e => handleSubmit(e)}
       >
           <div className={styles.inputContainer}>
-              <input onChange={e => handleInputChange(e)} className={styles.input} type="file" name="files[]" id="file" multiple />
+              <input onChange={e => handleInputChange(e)} className={styles.input} type="file" name="files[]" id="file" multiple accept="image/*"/>
               <label htmlFor="file" className={styles.label}><strong>Choose a file</strong></label>
               <span> or drag it here.</span>
               <button className={styles.button} type="submit" disabled={images.length < 1}>Upload</button>
