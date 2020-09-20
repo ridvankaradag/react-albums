@@ -90,7 +90,7 @@ const PhotoUpload = () => {
                 <input onChange={e => handleInputChange(e)} className={styles.input} type="file" name="files[]" id="file" multiple />
                 <label htmlFor="file" className={styles.label}><strong>Choose a file</strong></label>
                 <span> or drag it here.</span>
-                <button className={styles.button} type="submit">Upload</button>
+                <button className={styles.button} type="submit" disabled={images.length < 1}>Upload</button>
             </div>
         </form>
         <div className={styles.uploaded}>

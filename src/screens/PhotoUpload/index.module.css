@@ -41,6 +41,10 @@
     box-shadow: 0 6px 7px #00000045;
 }
 
+.button:disabled {
+    cursor: not-allowed;
+}
+
 .uploaded {
     display: flex;
     flex-wrap: wrap;
