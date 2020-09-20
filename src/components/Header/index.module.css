@@ -1,0 +1,29 @@
+.nav {
+    display: flex;
+    background-color: var(--header-color);
+}
+
+.list {
+    display: flex;
+    width: 100%;
+    list-style: none;
+}
+
+.item {
+    flex: 1;
+    display: flex;
+}
+
+.item > a {
+    text-decoration: none;
+    text-align: center;
+    width: 100%;
+    padding: 1.25em;
+    color: #fff;
+    opacity: .6;
+}
+
+.item > a.active {
+    opacity: 1;
+    text-decoration: underline;
+}

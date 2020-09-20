@@ -3,6 +3,14 @@
   --app-bg-color: #fff;
   --app-shadow-color: #0000002e;
   --form-container-bg-color: #2980b9;
+  --header-color: #c0392b;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  border: 0;
+  padding: 0;
 }
 
 body {

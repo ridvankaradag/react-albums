@@ -3,25 +3,15 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link
 } from "react-router-dom";
+import Header from '../components/Header'
 import PhotoUpload from '../screens/PhotoUpload'
 import Gallery from '../screens/Gallery';
 
 const Routes = () => (
     <Router>
-      <div>
-        <nav>
-          <ul>
-            <li>
-              <Link to="/">Upload Image</Link>
-            </li>
-            <li>
-              <Link to="/gallery">Gallery</Link>
-            </li>
-          </ul>
-        </nav>
-
+      <>
+        <Header/>
         <Switch>
           <Route path="/gallery">
             <Gallery/>
@@ -30,7 +20,7 @@ const Routes = () => (
             <PhotoUpload />
           </Route>
         </Switch>
-      </div>
+      </>
     </Router>
 );
 
