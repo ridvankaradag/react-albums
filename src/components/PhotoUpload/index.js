@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import {storage} from '../../config/firebase';
+import * as firebase from 'firebase';
 
 import styles from './index.module.css';
 
@@ -44,7 +46,35 @@ const PhotoUpload = () => {
             setImages(files)
         }
         console.log('images', images)
-      } 
+      }
+      
+      const handleSumbit = e => {
+        e.preventDefault();
+        e.stopPropagation();
+        console.log('images', images)
+
+        images.map(image => {
+            const uploadTask = storage.ref(`images/${image.name}`).put(image);
+            uploadTask.on('state_changed', 
+            (snapshot) => {
+              // progrss function ....
+              
+            }, 
+            (error) => {
+                 // error function ....
+              console.log(error);
+            }, 
+          () => {
+              // complete function ....
+              storage.ref('images').child(image.name).getDownloadURL().then(url => {
+                console.log(url); 
+                firebase.database().ref('urls').push({
+                    url : url
+                })
+              })
+          });
+        })
+      }
 
     return (
         <>
@@ -54,6 +84,7 @@ const PhotoUpload = () => {
             onDragOver={e => handleDragOver(e)}
             onDragEnter={e => handleDragEnter(e)}
             onDragLeave={e => handleDragLeave(e)}
+            onSubmit={e => handleSumbit(e)}
         >
             <div className={styles.inputContainer}>
                 <input onChange={e => handleInputChange(e)} className={styles.input} type="file" name="files[]" id="file" multiple />
@@ -63,14 +94,14 @@ const PhotoUpload = () => {
             </div>
         </form>
         <div className={styles.uploaded}>
-                {
-                    images.map(image => (
-                        <div className={styles.preview}>
-                            <img src={URL.createObjectURL(image)} className={styles.image} alt={image.name}/>
-                        </div>
-                    ))
-                }
-                </div>
+            {
+                images.map(image => (
+                    <div className={styles.preview}>
+                        <img src={URL.createObjectURL(image)} className={styles.image} alt={image.name}/>
+                    </div>
+                ))
+            }
+        </div>
         </>
     )
 }
