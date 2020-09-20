@@ -4,8 +4,8 @@ import styles from './index.module.css';
 const Preview = ({images}) => (
     <div className={styles.uploaded}>
         {
-            images.map(image => (
-                <div className={styles.preview}>
+            images.map((image, index) => (
+                <div key={index} className={styles.preview}>
                     <img src={URL.createObjectURL(image)} className={styles.image} alt={image.name}/>
                 </div>
             ))

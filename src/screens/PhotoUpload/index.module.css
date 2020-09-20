@@ -1,6 +1,16 @@
-.title {
+.title, .success, .error {
     margin: 1em 2em;
 }
+.success, .error {
+    text-align: center;
+}
+.success {
+    color: green;
+}
+.error {
+    color: red;
+}
+
 .form {
     outline: 2px dashed var(--form-container-bg-color);
     outline-offset: -.25em;

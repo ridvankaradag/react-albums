@@ -4,11 +4,13 @@ import * as firebase from 'firebase';
 
 import styles from './index.module.css';
 import Preview from '../../components/Preview';
+import Spinner from '../../components/Spinner';
 
 const PhotoUpload = () => {
 
     const [images, setImages] = useState([]);
     const [isDragging, setIsDragging] = useState(false);
+    const [status, setStatus] = useState(null)
 
     const handleDragging = (e, setValue) => {
       e.preventDefault();
@@ -47,23 +49,21 @@ const PhotoUpload = () => {
 
       images.map(image => {
           const uploadTask = storage.ref(`images/${image.name}`).put(image);
-          uploadTask.on('state_changed', 
+          uploadTask.on('state_changed',
           (snapshot) => {
-            // progrss function ....
-            
-          }, 
+            setStatus('loading')
+          },
           (error) => {
-                // error function ....
-            console.log(error);
+            console.log(error)
+            setStatus('error')
           }, 
         () => {
-            // complete function ....
-            storage.ref('images').child(image.name).getDownloadURL().then(url => {
-              console.log(url); 
-              firebase.database().ref('urls').push({
-                  url : url
-              })
+          storage.ref('images').child(image.name).getDownloadURL().then(url => {
+            firebase.database().ref('urls').push({
+                url : url
             })
+            setStatus('success')
+          })
         });
       })
     }
@@ -71,6 +71,18 @@ const PhotoUpload = () => {
     return (
       <>
       <h2 className={styles.title}>Upload your images</h2>
+      {
+        status === 'loading' &&
+        <Spinner/>
+      }
+      {
+        status === 'success' &&
+        <h6 className={styles.success}>All images have been uploaded successfully</h6>
+      }
+      {
+        status === 'error' &&
+        <h6 className={styles.error}>Something went wrong</h6>
+      }
       <form className={`${styles.form} ${isDragging ? styles.upload : ''}`} 
           encType="multipart/form-data"
           onDrop={e => handleDrop(e)}
