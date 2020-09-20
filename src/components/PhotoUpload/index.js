@@ -1,44 +1,54 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import styles from './index.module.css';
 
 const PhotoUpload = () => {
 
+    const [images, setImages] = useState([]);
+    const [isDragging, setIsDragging] = useState(false);
+
     const handleDragEnter = e => {
         e.preventDefault();
         e.stopPropagation();
+        setIsDragging(true)
       };
       const handleDragLeave = e => {
         e.preventDefault();
         e.stopPropagation();
+        setIsDragging(false)
       };
       const handleDragOver = e => {
         e.preventDefault();
         e.stopPropagation();
+        setIsDragging(true)
       };
       const handleDrop = e => {
         e.preventDefault();
         e.stopPropagation();
+        setIsDragging(false)
         let files = [...e.dataTransfer.files];
-
-        console.log('files', files);
-  
-        if (files && files.length > 0) {
-            const existingFiles = []
-            files = files.filter(f => !existingFiles.includes(f.name))
-            
-            e.dataTransfer.clearData();
-        }
+        addImages(files)
       }
 
       const handleInputChange = e => {
         e.preventDefault();
         e.stopPropagation();
-        console.log(e.target.files)
+        let files = [...e.target.files];
+        addImages(files)
       }
 
+      const addImages = files => {
+          console.log(files)
+        if (files && files.length > 0) {
+            files = files.filter(f => !images.includes(f.name))
+            setImages(files)
+        }
+        console.log('images', images)
+      } 
+
     return (
-        <form className={styles.form} 
+        <>
+        <form className={`${styles.form} ${isDragging ? styles.upload : ''}`} 
             encType="multipart/form-data"
             onDrop={e => handleDrop(e)}
             onDragOver={e => handleDragOver(e)}
@@ -47,10 +57,21 @@ const PhotoUpload = () => {
         >
             <div className={styles.inputContainer}>
                 <input onChange={e => handleInputChange(e)} className={styles.input} type="file" name="files[]" id="file" multiple />
-                <label htmlFor="file"><strong>Choose a file</strong><span className={styles.dragnDrop}> or drag it here</span>.</label>
+                <label htmlFor="file" className={styles.label}><strong>Choose a file</strong></label>
+                <span> or drag it here.</span>
                 <button className={styles.button} type="submit">Upload</button>
             </div>
         </form>
+        <div className={styles.uploaded}>
+                {
+                    images.map(image => (
+                        <div className={styles.preview}>
+                            <img src={URL.createObjectURL(image)} className={styles.image} alt={image.name}/>
+                        </div>
+                    ))
+                }
+                </div>
+        </>
     )
 }
 
