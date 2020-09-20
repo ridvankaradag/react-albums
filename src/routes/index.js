@@ -6,6 +6,7 @@ import {
   Link
 } from "react-router-dom";
 import PhotoUpload from '../screens/PhotoUpload'
+import Gallery from '../screens/Gallery';
 
 const Routes = () => (
     <Router>
@@ -23,7 +24,7 @@ const Routes = () => (
 
         <Switch>
           <Route path="/gallery">
-            <h1>Hello World</h1>
+            <Gallery/>
           </Route>
           <Route path="/">
             <PhotoUpload />
