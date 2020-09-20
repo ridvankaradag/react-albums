@@ -5,7 +5,7 @@ import {
   Route,
   Link
 } from "react-router-dom";
-import PhotoUpload from '../components/PhotoUpload'
+import PhotoUpload from '../screens/PhotoUpload'
 
 const Routes = () => (
     <Router>
