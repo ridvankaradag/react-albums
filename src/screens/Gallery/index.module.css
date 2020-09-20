@@ -1,3 +1,6 @@
+.title {
+    margin: 1em 2em;
+}
 .gallery {
     display: flex;
     flex-wrap: wrap;
@@ -7,10 +10,17 @@
 .item {
     border: 2px solid #2980b9;
     box-sizing: border-box;
-    flex: 25%;
+    flex: 100%;
     margin: 5px;
-    height: 100px;
-    max-width: calc(25% - 10px);
+    height: 200px;
+    max-width: calc(100% - 10px);
+}
+
+@media screen and (min-width: 426px ) {
+    .item {
+        flex: 50%;
+        max-width: calc(50% - 10px);
+    }
 }
 
 .item > .image {

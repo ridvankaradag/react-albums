@@ -1,7 +1,10 @@
+.title {
+    margin: 1em 2em;
+}
 .form {
     outline: 2px dashed var(--form-container-bg-color);
     outline-offset: -.25em;
-    margin: 1em 3em;
+    margin: 0em 3em;
 }
 
 .form.upload {

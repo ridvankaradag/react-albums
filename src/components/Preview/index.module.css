@@ -1,16 +1,23 @@
 .uploaded {
     display: flex;
     flex-wrap: wrap;
-    margin: 0 3em;
+    margin: 1em 3em;
 }
 
 .preview {
     border: 2px solid #2980b9;
     box-sizing: border-box;
-    flex: 25%;
+    flex: 50%;
     margin: 5px;
     height: 100px;
-    max-width: calc(25% - 10px);
+    max-width: calc(50% - 10px);
+}
+
+@media screen and (min-width: 426px ) {
+    .preview {
+        flex: 25%;
+        max-width: calc(25% - 10px);
+    }
 }
 
 .preview > .image {

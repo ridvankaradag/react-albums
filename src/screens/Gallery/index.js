@@ -23,15 +23,18 @@ const Gallery = () => {
         
     }
     return (
+        <>
+        <h2 className={styles.title}>Gallery</h2>
         <div className={styles.gallery}>
             {
                 images.map(image => (
-                    <div className={styles.item} key={image.id}>
+                    <a className={styles.item} key={image.id} href={image.url} target="_blank" rel="noopener noreferrer">
                         <img src={image.url} alt={`Gallery Item ${image.id}`} className={styles.image}/>
-                    </div>
+                    </a>
                 ))
             }
         </div>
+        </>
     )
 }
 

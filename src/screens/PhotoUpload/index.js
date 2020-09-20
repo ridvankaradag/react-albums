@@ -21,7 +21,6 @@ const PhotoUpload = () => {
       e.stopPropagation();
       setIsDragging(false)
       let files = [...e.dataTransfer.files];
-      var imageType = /image.*/;
       addImages(files)
     }
 
