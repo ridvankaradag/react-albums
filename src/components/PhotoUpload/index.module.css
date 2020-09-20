@@ -1,0 +1,21 @@
+.form {
+    padding: 8em 4em;
+    outline: 2px dashed var(--form-container-bg-color);
+    outline-offset: -1em;
+}
+
+.inputContainer {
+
+}
+
+.input {
+
+}
+
+.dragnDrop {
+
+}
+
+.button {
+
+}
