@@ -1,11 +1,11 @@
 import React from 'react';
 import appStyles from './index.module.css'
-import PhotoUpload from '../components/PhotoUpload';
+import Routes from '../routes';
 
 function App() {
   return (
     <div className={appStyles.app}>
-      <PhotoUpload/>
+      <Routes/>
     </div>
   );
 }
